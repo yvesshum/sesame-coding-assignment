@@ -14,9 +14,7 @@ api.interceptors.response.use(
         return response
     },
     (error) => {
-        console.log(error)
         if (error.name === "AxiosError" && error.response.status === 401) {
-            console.log("401")
             window.alert("Please verify your identity to continue");
             store.dispatch(authenticateWithPublicKey(store.getState().user.publicKey))
         }

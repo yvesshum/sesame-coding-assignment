@@ -14,7 +14,6 @@ export async function authenticate(signature, publicKey) {
   });
 
   async function refreshAccessToken() {
-    console.log("refreshing access token")
     await api.post("/auth/token");
   }
 

@@ -3,6 +3,7 @@ import {pool} from "../services/db.js"
 import jwt from 'jsonwebtoken'
 import web3 from "../utils/web3.js"
 import config from "config"
+import logger from "../utils/logger.js"
 const router = express.Router()
 async function verifySignature(publicKey, signature) {
     const query = await pool.query("SELECT nonce FROM USERS WHERE public_key = $1", [publicKey]);
@@ -97,7 +98,7 @@ router.post("/login", async (req, res) => {
 
         res.sendStatus(200)
     } catch (error) {
-        console.log(error)
+        logger.error(error)
         return res.status(error.status || 400).send(error.message);
     }
 });
@@ -161,7 +162,7 @@ router.post("/token", async (req, res) => {
         res.sendStatus(200);
 
     } catch (error) {
-        console.log("Error", error);
+        logger.error(error);
         return res.sendStatus(401);
     }
 });

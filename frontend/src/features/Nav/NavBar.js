@@ -8,7 +8,6 @@ export function NavBar() {
   const publicKey = useSelector((state) => state.user.publicKey);
 
   const handleConnectWallet = async () => {
-    console.log("connect clicked")
     await window.ethereum?.request({
       method: "eth_requestAccounts",
     });

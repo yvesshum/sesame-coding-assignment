@@ -1,0 +1,15 @@
+.App {
+  height: 100vh;
+}
+
+.banner {
+  color: #63b8eb;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.bannerSubtext {
+  color: whitesmoke;
+  font-size: 1.5rem;
+  width: 80%
+}

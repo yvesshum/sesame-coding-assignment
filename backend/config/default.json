@@ -1,0 +1,32 @@
+{
+  "db": {
+    "host": "localhost",
+    "port": 5432,
+    "user": "postgres",
+    "password": "password",
+    "db": "postgres"
+  },
+  "jwt": {
+    "secret": "123",
+    "refreshSecret": "456"
+  },
+  "server": {
+    "port": 8000
+  },
+  "usdc": {
+    "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "abi": [
+      {
+        "inputs": [
+          { "internalType": "address", "name": "account", "type": "address" }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+          { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]
+  }
+}

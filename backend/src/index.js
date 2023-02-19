@@ -23,6 +23,7 @@ passport.use(
       secretOrKey: config.get("jwt.secret"),
     },
     (payload, done) => {
+      console.log(payload)
       return done(null, payload);
     }
   )

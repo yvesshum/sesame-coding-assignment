@@ -1,14 +1,15 @@
-import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Image from "react-bootstrap/Image";
+import Row from "react-bootstrap/Row";
 import Stack from "react-bootstrap/Stack";
-import "../../App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { checkUSDCOwnership } from "../User/userSlice";
 import { toast } from "react-toastify";
-import config from "../../config.json"
+import "../../App.css";
+import config from "../../config.json";
+import { checkUSDCOwnership } from "../User/userSlice";
+
 export function Reward() {
   const dispatch = useDispatch();
   const publicKey = useSelector((state) => state.user.publicKey);
@@ -25,8 +26,8 @@ export function Reward() {
   };
   const handleCouponClick = () => {
     navigator.clipboard.writeText(coupon);
-    toast.info("Copied to clipboard!")
-  }
+    toast.info("Copied to clipboard!");
+  };
   return (
     <div>
       <Container>

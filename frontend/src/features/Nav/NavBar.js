@@ -1,7 +1,7 @@
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import { useSelector } from "react-redux";
 import truncateEthAddress from "truncate-eth-address";
 
 export function NavBar() {

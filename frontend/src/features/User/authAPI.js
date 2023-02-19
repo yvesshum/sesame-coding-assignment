@@ -6,7 +6,6 @@ export async function getNonce(publicKey) {
   return resp.data.nonce;
 }
 
-
 export async function authenticate(signature, publicKey) {
   let resp = await api.post(`/auth/login`, {
     signature,

@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { NavBar } from "./features/Nav/NavBar";
 import { Reward } from "./features/Reward/Reward";
-import {useDispatch} from 'react-redux'
 import { initialize } from "./features/User/userSlice";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(initialize())
-  }, [dispatch])
+    dispatch(initialize());
+  }, [dispatch]);
 
   return (
     <div className="bg-dark App">

@@ -27,6 +27,14 @@ to the local backend server to avoid CORS issues.
 There's a config file in `frontend/src/config.json` and `backend/config/default.json` 
 if you want to change anything. I recommend leaving it as-is for local development
 
+### Database 
+
+0. Navigate to `/database`
+1. Build the docker container with `docker build -t postgres .`
+2. Run the container with `docker run -itd -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password postgres`
+
+> If you want to change the username/password, make sure to update the backend config 
+
 ### Frontend 
 
 0. Navigate to `/frontend` 
@@ -39,11 +47,4 @@ if you want to change anything. I recommend leaving it as-is for local developme
 1. Install dependencies with `npm install`
 2. Run `npm run start:dev` to launch the dev version of the backend 
 
-### Database 
-
-0. Navigate to `/database`
-1. Build the docker container with `docker build -t postgres .`
-2. Run the container with `docker run -itd -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password postgres`
-
-> If you want to change the username/password, make sure to update the backend config 
 

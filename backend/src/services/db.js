@@ -1,14 +1,15 @@
 import pg from "pg"
+import config from "config"
 const Pool = pg.Pool
 
 export const pool = new Pool({
-  user: process.env.POSTGRES_USER,
-  host: process.env.POSTGRES_HOST,
-  database: process.env.POSTGRES_DB,
-  password: process.env.POSTGRES_PASSWORD,
-  port: process.env.POSTGRES_PORT,
-  max: process.env.POSTGRES_MAX_CONN ?? 20, 
-  connectionTimeoutMillis: process.env.POSTGRES_CONN_TIMEOUT ?? 2000, 
+  user: config.get("db.user") ,
+  host: config.get("db.host"),
+  database: config.get("db.db"),
+  password: config.get("db.password"),
+  port: config.get("db.port"),
+  max: config.get("db.max_conn") ?? 20, 
+  connectionTimeoutMillis: config.get("db.conn_timeout") ?? 2000, 
 });
 
 export const getUserInfo = async (pubKey) => {

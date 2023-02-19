@@ -4,11 +4,16 @@
     "port": 5432,
     "user": "postgres",
     "password": "password",
-    "db": "postgres"
+    "db": "postgres",
+    "max_conn": 20,
+    "conn_timeout": 2000
   },
   "jwt": {
     "secret": "change_me",
     "refreshSecret": "change_me"
+  },
+  "web3": {
+    "provider": "https://rpc.ankr.com/eth"
   },
   "server": {
     "port": 8000

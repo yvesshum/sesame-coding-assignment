@@ -12,7 +12,7 @@ const refreshTokenOpts = {
   maxAge: 7 * 24 * 60 * 60 * 1000,
   signed: true,
   path: "/auth",
-  sameSite: "Lax",
+  sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
 };
 
 const accessTokenOpts = {
@@ -21,7 +21,7 @@ const accessTokenOpts = {
   maxAge: 15 * 60 * 1000,
   signed: true,
   path: "/",
-  sameSite: "Lax",
+  sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
 };
 
 router.get("/nonce", async (req, res) => {

@@ -1,11 +1,12 @@
 import axios from "axios";
 import {store} from "../app/store";
 import { authenticateWithPublicKey } from "../features/User/userSlice";
+import config from "../config.json"
 const api = axios.create({
     baseURL:
         process.env.NODE_ENV === "development"
             ? null
-            : "https://us-central1-decent-destiny-329402.cloudfunctions.net/api/",
+            : config.backend,
     withCredentials: true,
 });
 

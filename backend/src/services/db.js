@@ -1,22 +1,30 @@
-import pg from "pg"
-import config from "config"
-const Pool = pg.Pool
+import pg from "pg";
+import config from "config";
+const Pool = pg.Pool;
 
 export const pool = new Pool({
-  user: config.get("db.user") ,
+  user: config.get("db.user"),
   host: config.get("db.host"),
   database: config.get("db.db"),
   password: config.get("db.password"),
   port: config.get("db.port"),
-  max: config.get("db.max_conn") ?? 20, 
-  connectionTimeoutMillis: config.get("db.conn_timeout") ?? 2000, 
+  max: config.get("db.max_conn") ?? 20,
+  connectionTimeoutMillis: config.get("db.conn_timeout") ?? 2000,
 });
 
+/**
+ * 
+ * @param {String} pubKey of the user 
+ * @returns user data including public_key, owns_usdc, coupon
+ */
 export const getUserInfo = async (pubKey) => {
-  const data = await pool.query(`
+  const data = await pool.query(
+    `
         SELECT public_key, owns_usdc, coupon 
         FROM USERS u
         WHERE u.public_key = $1
-    `, [pubKey])
-  return data
-}
+    `,
+    [pubKey]
+  );
+  return data;
+};

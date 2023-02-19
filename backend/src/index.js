@@ -12,19 +12,22 @@ import fs from "fs";
 import https from "https";
 const app = express();
 
+// General logging
 app.use((req, res, next) => {
   logger.info(`${req.method} ${req.path}`);
   next();
-})
+});
+
+// CORS
 app.use(cors({ origin: "https://yvesshum.github.io", credentials: true }));
 
+// Parsing
 app.use(express.json());
 app.use(cookieParser(config.get("jwt.secret")));
 passport.use(
   new Strategy(
     {
-      jwtFromRequest: (req) =>
-        req.signedCookies.accessToken,
+      jwtFromRequest: (req) => req.signedCookies.accessToken,
       secretOrKey: config.get("jwt.secret"),
     },
     (payload, done) => {
@@ -33,15 +36,17 @@ passport.use(
   )
 );
 
+// Routes
 app.use("/auth", authRoutes);
-
 app.use("/user", passport.authenticate("jwt", { session: false }), userRoutes);
 
+// Error handling
 app.use((err, req, res, next) => {
   logger.error(err.stack);
   res.status(500).send("Something went wrong");
 });
 
+// Server start
 const PORT = config.get("server.port");
 let server = null;
 if (process.env.NODE_ENV === "development") {

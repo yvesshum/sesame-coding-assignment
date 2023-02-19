@@ -93,6 +93,7 @@ router.post("/login", async (req, res) => {
             path: "/",
             httpOnly: true,
             maxAge: 15 * 60 * 1000,
+            signed: true,
             sameSite: process.env.NODE_ENV === "development" ? "Lax" : "Strict",
         });
 
@@ -157,6 +158,7 @@ router.post("/token", async (req, res) => {
             secure: process.env.NODE_ENV !== "development",
             maxAge: 15 * 60 * 1000,
             path: "/",
+            signed: true,
             sameSite: process.env.NODE_ENV === "development" ? "Lax" : "Strict",
         });
         res.sendStatus(200);

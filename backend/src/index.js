@@ -7,22 +7,27 @@ import passport from "passport";
 import { Strategy } from "passport-jwt";
 import cookieParser from "cookie-parser";
 import { pool } from "./services/db.js";
-import config from "config"
-import fs from "fs"
-import https from "https"
+import config from "config";
+import fs from "fs";
+import https from "https";
 const app = express();
-app.use((req, res, next) => {
-  next();
-});
 
-app.use(cors({origin: "https://yvesshum.github.io", credentials: true}));
+app.use(cors({ origin: "https://yvesshum.github.io", credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser(config.get("jwt.secret")));
+app.use((req, res, next) => {
+  console.log("cookies", req.cookies);
+  console.log("signed cookies", req.signedCookies);
+  next();
+});
 passport.use(
   new Strategy(
     {
-      jwtFromRequest: (req) => req.signedCookies.accessToken,
+      jwtFromRequest: (req) =>
+        req[
+          process.env.NODE_ENV === "development" ? "cookies" : "signedCookies"
+        ].accessToken,
       secretOrKey: config.get("jwt.secret"),
     },
     (payload, done) => {
@@ -30,7 +35,6 @@ passport.use(
     }
   )
 );
-
 
 app.use("/auth", authRoutes);
 
@@ -42,7 +46,7 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = config.get("server.port");
-let server = null 
+let server = null;
 if (process.env.NODE_ENV === "development") {
   server = app.listen(PORT, () => {
     logger.info(`Server started on port ${PORT}`);
@@ -50,24 +54,23 @@ if (process.env.NODE_ENV === "development") {
 } else {
   const options = {
     key: fs.readFileSync("./certs/api.key"),
-    cert: fs.readFileSync("./certs/api.crt")
-  }
-  server = https.createServer(options, app).listen(PORT, function(){
-    logger.info(`Server started on port ${PORT}`)
+    cert: fs.readFileSync("./certs/api.crt"),
+  };
+  server = https.createServer(options, app).listen(PORT, function () {
+    logger.info(`Server started on port ${PORT}`);
   });
 }
 
-
-process.on('SIGTERM', async () => {
-    logger.info("Gracefully shutting down")
-    server.close()
-    await pool.end()
-    process.exit(1)
-})
+process.on("SIGTERM", async () => {
+  logger.info("Gracefully shutting down");
+  server.close();
+  await pool.end();
+  process.exit(1);
+});
 
 process.on("SIGINT", async () => {
-    logger.info("Gracefully shutting down")
-    server.close()
-    await pool.end()
-    process.exit(0)
-})
+  logger.info("Gracefully shutting down");
+  server.close();
+  await pool.end();
+  process.exit(0);
+});

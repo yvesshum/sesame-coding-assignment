@@ -11,6 +11,9 @@ import config from "config"
 import fs from "fs"
 import https from "https"
 const app = express();
+app.use((req, res, next) => {
+  next();
+});
 
 app.use(cors({origin: "https://yvesshum.github.io", credentials: true}));
 
@@ -19,20 +22,15 @@ app.use(cookieParser(config.get("jwt.secret")));
 passport.use(
   new Strategy(
     {
-      jwtFromRequest: (req) => req.cookies.accessToken,
+      jwtFromRequest: (req) => req.signedCookies.accessToken,
       secretOrKey: config.get("jwt.secret"),
     },
     (payload, done) => {
-      console.log(payload)
       return done(null, payload);
     }
   )
 );
 
-app.use((req, res, next) => {
-  logger.info(`${req.method} ${req.path}`);
-  next();
-});
 
 app.use("/auth", authRoutes);
 

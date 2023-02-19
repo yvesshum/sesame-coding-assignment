@@ -9,7 +9,7 @@ const logger = winston.createLogger({
   ],
 });
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development" || true) {
   logger.add(
     new winston.transports.Console({
       format: winston.format.simple(),

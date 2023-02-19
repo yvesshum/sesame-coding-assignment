@@ -8,10 +8,10 @@ import { Strategy } from "passport-jwt";
 import cookieParser from "cookie-parser";
 import { pool } from "./services/db.js";
 import config from "config"
+import fs from "fs"
 const app = express();
 
-// TODO: Fix this after deployment
-app.use(cors());
+app.use(cors({origin: "https://yvesshum.github.io/sesame-coding-assignment/", credentials: true}));
 
 app.use(express.json());
 app.use(cookieParser(config.get("jwt.secret")));
@@ -42,9 +42,21 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = config.get("server.port");
-const server = app.listen(PORT, () => {
-  logger.info(`Server started on port ${PORT}`);
-});
+let server = null 
+if (process.env.NODE_ENV === "development") {
+  server = app.listen(PORT, () => {
+    logger.info(`Server started on port ${PORT}`);
+  });
+} else {
+  const options = {
+    key: fs.readFileSync("./certs/api.key"),
+    cert: fs.readFileSync("./certs/api.crt")
+  }
+  server = https.createServer(options, app).listen(PORT, function(){
+    logger.info(`Server started on port ${PORT}`)
+  });
+}
+
 
 process.on('SIGTERM', async () => {
     logger.info("Gracefully shutting down")

@@ -1,6 +1,8 @@
 # Sesame Coding Assignment 
 
-This repo contains my solution to Sesame Lab's coding assignment 
+This repo contains my solution to Sesame Lab's coding assignment.
+
+You can view the live version on https://yvesshum.github.io/sesame-coding-assignment/
 
 ## Overview 
 
@@ -14,7 +16,7 @@ This project is split into 3 components: Frontend, Backend Database.
 
 ## Requirements 
 
-- Node >= 18
+- Node >= 18 (might work with 16, I have not tested it)
 - Docker (unless you want to supply your own postgres DB)
 
 ## How to run (local dev mode)
@@ -44,3 +46,4 @@ if you want to change anything. I recommend leaving it as-is for local developme
 2. Run the container with `docker run -itd -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password postgres`
 
 > If you want to change the username/password, make sure to update the backend config 
+

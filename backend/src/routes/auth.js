@@ -85,7 +85,7 @@ router.post("/login", async (req, res) => {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
             signed: true,
-            sameSite: process.env.NODE_ENV === "development" ? "Lax": "Strict",
+            sameSite: process.env.NODE_ENV === "development" ? "Lax": "None",
         });
 
         res.cookie("accessToken", accessToken, {
@@ -94,7 +94,7 @@ router.post("/login", async (req, res) => {
             httpOnly: true,
             maxAge: 15 * 60 * 1000,
             signed: true,
-            sameSite: process.env.NODE_ENV === "development" ? "Lax" : "Strict",
+            sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
         });
 
         res.sendStatus(200)
@@ -150,7 +150,7 @@ router.post("/token", async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000,
             signed: true,
             path: "/auth",
-            sameSite: process.env.NODE_ENV === "development" ? "Lax" : "Strict",
+            sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
         });
 
         res.cookie("accessToken", accessToken, {
@@ -159,7 +159,7 @@ router.post("/token", async (req, res) => {
             maxAge: 15 * 60 * 1000,
             path: "/",
             signed: true,
-            sameSite: process.env.NODE_ENV === "development" ? "Lax" : "Strict",
+            sameSite: process.env.NODE_ENV === "development" ? "Lax" : "None",
         });
         res.sendStatus(200);
 

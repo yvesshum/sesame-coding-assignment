@@ -25,7 +25,10 @@ Running on local dev mode pretty much relies on the frontend proxying requests
 to the local backend server to avoid CORS issues.
 
 There's a config file in `frontend/src/config.json` and `backend/config/default.json` 
-if you want to change anything. I recommend leaving it as-is for local development
+if you want to change anything. I recommend leaving it as-is for local development.
+
+The default config assumes that the database is available on localhost, port 5432, 
+with username=postgres and password=password.
 
 ### Database 
 

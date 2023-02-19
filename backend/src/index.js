@@ -12,15 +12,14 @@ import fs from "fs";
 import https from "https";
 const app = express();
 
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.path}`);
+  next();
+})
 app.use(cors({ origin: "https://yvesshum.github.io", credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser(config.get("jwt.secret")));
-app.use((req, res, next) => {
-  console.log("cookies", req.cookies);
-  console.log("signed cookies", req.signedCookies);
-  next();
-});
 passport.use(
   new Strategy(
     {

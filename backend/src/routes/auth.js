@@ -6,6 +6,24 @@ import config from "config";
 import logger from "../utils/logger.js";
 const router = express.Router();
 
+const refreshTokenOpts = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV !== "development",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  signed: true,
+  path: "/auth",
+  sameSite: "Lax",
+};
+
+const accessTokenOpts = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV !== "development",
+  maxAge: 15 * 60 * 1000,
+  signed: true,
+  path: "/",
+  sameSite: "Lax",
+};
+
 router.get("/nonce", async (req, res) => {
   const publicKey = req.query.publicKey;
   if (!publicKey) {
@@ -74,22 +92,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-const refreshTokenOpts = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV !== "development",
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-  signed: true,
-  path: "/auth",
-  sameSite: "None",
-};
-const accessTokenOpts = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV !== "development",
-  maxAge: 15 * 60 * 1000,
-  path: "/",
-  signed: true,
-  sameSite: "None",
-};
 router.post("/token", async (req, res) => {
   const refreshToken = req.signedCookies.refreshToken;
   if (refreshToken == null) return res.sendStatus(401);

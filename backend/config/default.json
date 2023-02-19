@@ -7,8 +7,8 @@
     "db": "postgres"
   },
   "jwt": {
-    "secret": "123",
-    "refreshSecret": "456"
+    "secret": "change_me",
+    "refreshSecret": "change_me"
   },
   "server": {
     "port": 8000

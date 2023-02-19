@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import { pool } from "./services/db.js";
 import config from "config"
 import fs from "fs"
+import https from "https"
 const app = express();
 
 app.use(cors({origin: "https://yvesshum.github.io/sesame-coding-assignment/", credentials: true}));

@@ -25,9 +25,7 @@ passport.use(
   new Strategy(
     {
       jwtFromRequest: (req) =>
-        req[
-          process.env.NODE_ENV === "development" ? "cookies" : "signedCookies"
-        ].accessToken,
+        req.signedCookies.accessToken,
       secretOrKey: config.get("jwt.secret"),
     },
     (payload, done) => {

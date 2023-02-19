@@ -12,7 +12,7 @@ import fs from "fs"
 import https from "https"
 const app = express();
 
-app.use(cors({origin: "https://yvesshum.github.io/sesame-coding-assignment/", credentials: true}));
+app.use(cors({origin: "https://yvesshum.github.io", credentials: true}));
 
 app.use(express.json());
 app.use(cookieParser(config.get("jwt.secret")));

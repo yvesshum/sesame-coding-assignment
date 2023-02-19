@@ -1,6 +1,6 @@
 import Web3 from "web3";
 import config from "config"
-const web3 = new Web3(process.env.RPC_URL ?? "https://rpc.ankr.com/eth");
+const web3 = new Web3(config.get("web3.provider"));
 
 export default web3;
 

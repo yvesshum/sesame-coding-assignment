@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/sesame-coding-assignment/static/css/main.c2fd6b1a.css",
-    "main.js": "/sesame-coding-assignment/static/js/main.0c5fc9d4.js",
+    "main.js": "/sesame-coding-assignment/static/js/main.dc8ab22d.js",
     "index.html": "/sesame-coding-assignment/index.html",
     "main.c2fd6b1a.css.map": "/sesame-coding-assignment/static/css/main.c2fd6b1a.css.map",
-    "main.0c5fc9d4.js.map": "/sesame-coding-assignment/static/js/main.0c5fc9d4.js.map"
+    "main.dc8ab22d.js.map": "/sesame-coding-assignment/static/js/main.dc8ab22d.js.map"
   },
   "entrypoints": [
     "static/css/main.c2fd6b1a.css",
-    "static/js/main.0c5fc9d4.js"
+    "static/js/main.dc8ab22d.js"
   ]
 }
